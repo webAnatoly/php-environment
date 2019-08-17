@@ -1,0 +1,24 @@
+{
+    "name": "tolik/try-composer",
+    "description": "first meeting with composer",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Tolik Dem",
+            "email": "tolik.demianov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/Pairs.php",
+            "src/Lists.php",
+            "src/Runner.php"
+        ]
+    },
+    "require": {
+        "tightenco/collect": "^5.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}

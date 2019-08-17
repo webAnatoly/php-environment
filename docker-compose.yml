@@ -1,0 +1,46 @@
+version: "3"
+services:
+    apache-php:
+        build: ./php
+        ports: 
+            - "4444:80"
+        volumes:
+            - ./app:/var/www/html/
+        depends_on:
+            - db
+        networks:
+            - default
+    db:
+        image: mysql:5.7.25
+        ports: 
+            - "3307:3307"
+        # command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode="" # установить кодировку базы данных по умолчанию
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode="" # установить кодировку базы данных по умолчанию
+        
+        environment:
+            MYSQL_DATABASE: appDb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+        volumes:
+            # - ./dump:/docker-entrypoint-initdb.d
+            # - ./conf:/etc/mysql/conf.d
+            # - mydevelopdb:/var/lib/mysql
+            - ./mysql:/var/lib/mysql #файлы базы mysql
+        networks:
+            - default
+        container_name: mysql_db_7.3 # задаем свое имя контейнеру по нему будем обращаться из php скрипта к базе
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+        - db
+        ports:
+            - 4445:80
+        environment:
+            MYSQL_DATABASE: appDb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+# volumes:
+#     mydevelopdb:
+
