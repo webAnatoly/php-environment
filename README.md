@@ -2,7 +2,7 @@
 
 Composer тут запускается из докер образа с указанием папки куда мапяться зависимости из контейнера на хост машину.  
 
-Пример команд:  
+Пример команд для запуска композера из образа:  
 docker run --rm -v $PWD:/app composer require --dev phpunit/phpunit ^8  
 docker run --rm -v $PWD:/app composer require tightenco/collect  
 
